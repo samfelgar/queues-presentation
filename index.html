@@ -1,40 +1,275 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+  <title>Queues - Beer and Code</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/moon.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h2>Filas e mensageria</h2>
+        <pre>
+					<code data-trim class="php">
+						if (Carbon::createFromTimestamp(1636548300000)->isToday()) {
+							return $beer && $code; //true
+						}
+					</code>
+				</pre>
+        <div>
+          <small>
+            <a href="https://twitter.com/samfelgar" target="_blank">@samfelgar</a>
+          </small>
+        </div>
+      </section>
+
+      <section>
+        <section>
+          <h2>intro</h2>
+        </section>
+        <section>
+          <h3>uses</h3>
+          <ul>
+            <li>asynchronous job processing</li>
+            <li>asynchronous messaging</li>
+          </ul>
+        </section>
+        <section>
+          <h3>consumer architectures</h3>
+          <ul>
+            <li>monolithic</li>
+            <li>microservices</li>
+            <li>lambda functions</li>
+          </ul>
+        </section>
+      </section>
+
+      <section>
+
+        <section>
+          <h2>some definitions</h2>
+        </section>
+
+        <section>
+          <h3>stack</h3>
+          <div class="r-stack">
+            <div class="fragment fade-out" data-fragment-index="0">
+              <blockquote cite="https://www.thoughtco.com/definition-of-stack-in-programming-958162">
+                Similar a uma pilha de pratos em um restaurante ou cafeteria, elementos em uma pilha (stack) são
+                adicionados
+                ou removidos do topo da pilha, seguindo a ordem "last in, first out" ou LIFO.
+              </blockquote>
+            </div>
+            <div class="fragment" data-fragment-index="0">
+              <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2013/03/stack.png" alt="stack">
+              <div>
+                <small>
+                  <cite>Geeks for Geeks</cite>
+                </small>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section>
+          <h3>queue</h3>
+          <div class="r-stack">
+            <div class="fragment fade-out" data-fragment-index="0">
+              <blockquote cite="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">
+                ...uma fila é uma coleção de entidades mantidas em sequência e podem ser modificados pela <strong>adição
+                  de entidades em uma ponta e remoção de entidades em outra.</strong>
+              </blockquote>
+            </div>
+            <div class="fragment" data-fragment-index="0">
+              <img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/02/Queue.png" alt="queue">
+              <div>
+                <small>
+                  <cite>Geeks for Geeks</cite>
+                </small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>messaging</h3>
+          <blockquote
+            cite="https://www.incognito.com/tips-and-tutorials/understanding-messaging-part-one-the-basics-2/#:~:text=Messaging%20is%20a%20type%20of,sending%20and%20receiving%20of%20data.">
+            Mensageria é um tipo de tecnologia que te ajuda a superar os desafios da comunicação, assíncrona, entre
+            programas.
+          </blockquote>
+        </section>
+
+        <section>
+          <h3>amqp</h3>
+          <blockquote cite="https://www.amqp.org/about/what">
+            O Protocolo Avançado de Enfileiramento de Mensagens (AMQP, em inglês) é um padrão aberto para passagem de
+            mensagens empresariais entre aplicações ou organizações. Ele conecta sistemas, alimenta processos de
+            negócios com as informações que eles precisam e transmitem, com confiabilidade, as instruções que atingem
+            seus objetivos.
+          </blockquote>
+        </section>
+
+        <section>
+          <h3>message broker</h3>
+          <div class="r-stack">
+            <div class="fragment fade-out" data-fragment-index="0">
+              <blockquote cite="https://www.ibm.com/cloud/learn/message-brokers">
+                Um "corretor de mensagens" é um software que permite a comunicação e troca de informações entre
+                aplicações, sistemas e serviços.
+              </blockquote>
+            </div>
+            <div class="fragment current-visible" data-fragment-index="0">
+              <blockquote cite="https://www.ibm.com/cloud/learn/message-brokers">
+                O "corretor de mensagens" faz isso traduzindo mensagens entre protocolos formais de mensageria. Isto
+                permite que serviços interdependentes "conversem" diretamente, mesmo que eles tenham sido escritos em
+                diferentes linguagens ou implementados em diferentes plataformas.
+              </blockquote>
+            </div>
+            <div class="fragment">
+              <img src="https://tsh.io/wp-content/uploads/2021/04/message-broker-example-4_.png" alt="message broker"
+                height="400">
+              <div>
+                <small>
+                  <cite>The Software House</cite>
+                </small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <section>
+
+        <section>
+          <h2>alguns serviços</h2>
+        </section>
+
+        <section>
+          <h3>para uso simples</h3>
+          <ul>
+            <li>database</li>
+            <li>Redis</li>
+            <li>Beanstalkd</li>
+            <li>SQS</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>para uso complexo</h3>
+          <ul>
+            <li>RabbitMQ</li>
+            <li>Apache Kafka</li>
+            <li>SNS</li>
+          </ul>
+        </section>
+
+      </section>
+
+      <section>
+
+        <section>
+          <h2>RabbitMQ</h2>
+          <h3>key concepts</h3>
+        </section>
+
+        <section>
+          <h3>Exchange</h3>
+          <ul>
+            <li>direct</li>
+            <li>fanout</li>
+            <li>topic</li>
+            <li>headers</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Bindings</h3>
+        </section>
+
+        <section>
+          <h3>Queue</h3>
+        </section>
+
+      </section>
+
+      <section>
+        <h2>RabbitMQ</h2>
+        <a href="http://tryrabbitmq.com/" target="_blank">RabbitMQ Simulator</a>
+      </section>
+
+      <section>
+        <h2>RabbitMQ</h2>
+        <a href="https://github.com/samfelgar/rabbitmq-php" target="_blank">Exemplo de implementação</a>
+      </section>
+
+      <section>
+
+        <section>
+          <h2>nosso cenário</h2>
+        </section>
+
+        <section>
+          <ul>
+            <li>filas: processamento de jobs</li>
+            <li>REST: comunicação api/connect</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>em desenvolvimento</h3>
+          <div>
+            criação de licenças <a href="https://dev.to/samfelgar/filas-no-laravel-sem-jobs-2c82"
+              target="_blank">utilizando SQS</a> com payload simples:
+          </div>
+          <pre>
+            <code>
+              {
+                "name": "Jane Doe",
+                "email": "jane@example.com",
+                "plan": "premium",
+                "team_id": 1,
+                "external_id": "some_identifier"
+              }
+            </code>
+          </pre>
+        </section>
+
+      </section>
+
+      <section>
+        <h2>referências</h2>
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
 </html>
